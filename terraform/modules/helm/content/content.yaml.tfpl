@@ -1,0 +1,5 @@
+cloud_storage_type: ${cloud_storage_type}
+cloud_storage_key: ${cloud_storage_key}
+cloud_storage_secret: ${cloud_storage_secret}
+cloud_storage_container: ${cloud_storage_container}
+schema_base_path: ${schema_base_path}

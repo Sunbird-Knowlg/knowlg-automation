@@ -1,0 +1,39 @@
+provisioning:
+  topics:
+  - name: "${content_publish_topic}"
+    partitions: 1
+    replicationFactor: 1
+  - name: "${content_postpublish_topic}"
+    partitions: 1
+    replicationFactor: 1
+  - name: "${content_postpublish_topic}"
+    partitions: 1
+    replicationFactor: 1
+  - name: "${learning_job_request_topic}"
+    partitions: 1
+    replicationFactor: 1
+  - name: "${learning_graph_events_topic}"
+    partitions: 1
+    replicationFactor: 1
+  - name: "${search_indexer_group_topic}"
+    partitions: 1
+    replicationFactor: 1
+  - name: "${qrimage_request_topic}"
+    partitions: 1
+    replicationFactor: 1
+  - name: "${telemetry_raw_topic}"
+    partitions: 1
+    replicationFactor: 1
+  - name: "${dialcode_context_job_request_topic}"
+    partitions: 1
+    replicationFactor: 1
+  - name: "${dialcode_context_job_request_failed_topic}"
+    partitions: 1
+    replicationFactor: 1
+
+persistence:
+  size: 10Gi
+
+zookeeper:
+  persistence:
+    size: 2Gi
