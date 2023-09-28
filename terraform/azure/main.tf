@@ -39,9 +39,9 @@ module "storage" {
 provider "helm" {
   kubernetes {
     host                   = module.aks.kubernetes_host
-    client_certificate     = module.aks.client_certificate
+    client_certificate      = module.aks.client_certificate
     client_key             = module.aks.client_key
-    cluster_ca_certificate = module.aks.cluster_ca_certificate
+    cluster_ca_certificate  = module.aks.cluster_ca_certificate
   }
 }
 
@@ -56,12 +56,12 @@ module "flink" {
   source                         = "../modules/helm/flink"
   env                            = var.env
   building_block                 = var.building_block
-  depends_on         = [module.kafka]
-  cloud_storage_type = var.cloud_storage_type
-  cloud_storage_key = var.cloud_storage_key
-  cloud_storage_secret = var.cloud_storage_secret
-  cloud_storage_container = var.cloud_storage_container
-  schema_base_path = var.schema_base_path
+  depends_on                     = [module.kafka]
+  cloud_storage_type             = var.cloud_storage_type
+  cloud_storage_key              = module.storage.azurerm_storage_account_name
+  cloud_storage_secret           = module.storage.azurerm_storage_account_key
+  cloud_storage_container        = module.storage.azurerm_storage_container
+  schema_base_path               = "https://${module.storage.azurerm_storage_account_name}.blob.core.windows.net/sunbird-content-staging-knowlg/schemas/local"
 }
 
 module "cassandra" {
@@ -93,23 +93,23 @@ module "elasticsearch" {
 }
 
 module "content" {
-  source         = "../modules/helm/content"
-  env            = var.env
-  building_block = var.building_block
-  depends_on     = [module.elasticsearch]
-  cloud_storage_type = var.cloud_storage_type
-  cloud_storage_key = var.cloud_storage_key
-  cloud_storage_secret = var.cloud_storage_secret
-  cloud_storage_container = var.cloud_storage_container
-  schema_base_path = var.schema_base_path
+  source                    = "../modules/helm/content"
+  env                       = var.env
+  building_block            = var.building_block
+  depends_on                = [module.elasticsearch]
+  cloud_storage_type        = var.cloud_storage_type
+  cloud_storage_key         = module.storage.azurerm_storage_account_name
+  cloud_storage_secret      = module.storage.azurerm_storage_account_key
+  cloud_storage_container   = module.storage.azurerm_storage_container
+  schema_base_path          = "https://${module.storage.azurerm_storage_account_name}.blob.core.windows.net/sunbird-content-staging-knowlg/schemas/local"
 }
 
 module "taxonomy" {
-  source         = "../modules/helm/taxonomy"
-  env            = var.env
-  building_block = var.building_block
-  depends_on     = [module.content]
-  schema_base_path = var.schema_base_path
+  source            = "../modules/helm/taxonomy"
+  env               = var.env
+  building_block    = var.building_block
+  depends_on        = [module.content]
+  schema_base_path  = "https://${module.storage.azurerm_storage_account_name}.blob.core.windows.net/sunbird-content-staging-knowlg/schemas/local"
 }
 
 module "dial" {
@@ -120,10 +120,10 @@ module "dial" {
 }
 
 module "search" {
-  source         = "../modules/helm/search"
-  env            = var.env
-  building_block = var.building_block
-  depends_on     = [module.dial]
-  schema_base_path = var.schema_base_path
+  source            = "../modules/helm/search"
+  env               = var.env
+  building_block    = var.building_block
+  depends_on        = [module.dial]
+  schema_base_path  = "https://${module.storage.azurerm_storage_account_name}.blob.core.windows.net/sunbird-content-staging-knowlg/schemas/local"
 }
 

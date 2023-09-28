@@ -36,3 +36,13 @@ resource "azurerm_storage_container" "storage_container" {
   storage_account_name  = azurerm_storage_account.storage_account.name
   container_access_type = "container"
 }
+
+resource "azurerm_storage_blob" "upload_schemas" {
+  for_each               = fileset(path.module, "schemas/**")
+  name                   = each.value
+  storage_account_name   = azurerm_storage_account.storage_account.name
+  storage_container_name = azurerm_storage_container.storage_container.name
+  type                   = "Block"
+  access_tier            = "Cool"
+  source                 = "${path.module}/${each.key}"
+}

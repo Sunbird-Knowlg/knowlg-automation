@@ -33,23 +33,3 @@ variable "cloud_storage_type" {
   description = "Cloud storage type"
   default     = "azure"
 }
-
-variable "cloud_storage_key" {
-  type        = string
-  description = "Cloud storage key"
-}
-
-variable "cloud_storage_secret" {
-  type        = string
-  description = "Cloud storage secret"
-}
-
-variable "cloud_storage_container" {
-  type        = string
-  description = "Cloud storage secret"
-}
-
-variable "schema_base_path" {
-  type        = string
-  description = "Schema base path"
-}
