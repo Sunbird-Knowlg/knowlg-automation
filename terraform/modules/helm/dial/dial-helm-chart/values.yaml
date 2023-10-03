@@ -20,7 +20,7 @@ strategy:
   type: RollingUpdate
   maxsurge: 25%
   maxunavailable: 25%
-serviceType: ClusterIP
+serviceType: LoadBalancer
 cassandra_connection: cassandra-db.knowlg-db.svc.cluster.local:9042
 redis_connection: redis-master.knowlg-db.svc.cluster.local
 es_connection: elasticsearch.knowlg-db.svc.cluster.local:9200

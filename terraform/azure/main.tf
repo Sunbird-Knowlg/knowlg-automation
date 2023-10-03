@@ -127,3 +127,10 @@ module "search" {
   schema_base_path  = "https://${module.storage.azurerm_storage_account_name}.blob.core.windows.net/sunbird-content-staging-knowlg/schemas/local"
 }
 
+
+module "nginx-ingress" {
+  source            = "../modules/helm/nginx-ingress"
+  env               = var.env
+  building_block    = var.building_block
+  depends_on        = [module.search]
+}
