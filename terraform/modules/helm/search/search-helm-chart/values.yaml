@@ -6,8 +6,8 @@ env:
   javaoptions: -Xmx600m
 
 replicaCount: 1
-repository: docker.io/sanketikahub/knowlg-search
-image_tag: R5.7.0
+repository: docker.io/aimansharief/search-service-modified
+image_tag: R5.2.0
 resources:
   requests:
     cpu: 100m

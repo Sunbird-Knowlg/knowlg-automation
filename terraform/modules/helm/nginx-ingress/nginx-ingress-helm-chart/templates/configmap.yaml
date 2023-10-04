@@ -85,48 +85,6 @@ data:
               proxy_set_header Host $host;
               proxy_pass $target;
             }
-    location /v3/search {
-              set $target http://search-service.knowlg-api.svc.cluster.local:9000;
-              rewrite ^/v3/search /v3/search$1 break;
-              proxy_http_version 1.1;
-              proxy_set_header Host $host;
-              proxy_pass $target;
-            }
-    location /v3/private/search {
-              set $target http://search-service.knowlg-api.svc.cluster.local:9000;
-              rewrite ^/v3/private/search /v3/private/search$1 break;
-              proxy_http_version 1.1;
-              proxy_set_header Host $host;
-              proxy_pass $target;
-            }
-    location /v2/search/count {
-              set $target http://search-service.knowlg-api.svc.cluster.local:9000;
-              rewrite ^/v2/search/count  /v2/search/count$1 break;
-              proxy_http_version 1.1;
-              proxy_set_header Host $host;
-              proxy_pass $target;
-            }
-    location /v3/count {
-              set $target http://search-service.knowlg-api.svc.cluster.local:9000;
-              rewrite ^/v3/count  /v3/count$1 break;
-              proxy_http_version 1.1;
-              proxy_set_header Host $host;
-              proxy_pass $target;
-            }
-    location /v2/metrics {
-              set $target http://search-service.knowlg-api.svc.cluster.local:9000;
-              rewrite ^/v2/metrics  /v2/metrics$1 break;
-              proxy_http_version 1.1;
-              proxy_set_header Host $host;
-              proxy_pass $target;
-            }
-    location /v3/audit/ {
-              set $target http://search-service.knowlg-api.svc.cluster.local:9000;
-              rewrite ^/v3/audit/(.*) /v3/audit/$1 break;
-              proxy_http_version 1.1;
-              proxy_set_header Host $host;
-              proxy_pass $target;
-            }
 
   sites.conf: |-
     # Ref: https://github.com/openresty/openresty/#resolvconf-parsing
