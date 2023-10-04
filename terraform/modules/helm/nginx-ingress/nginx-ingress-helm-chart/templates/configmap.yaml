@@ -85,7 +85,13 @@ data:
               proxy_set_header Host $host;
               proxy_pass $target;
             }
-
+    location /v3/search {
+              set $target http://search-service.knowlg-api.svc.cluster.local:9000;
+              rewrite ^/v3/search /v3/search$1 break;
+              proxy_http_version 1.1;
+              proxy_set_header Host $host;
+              proxy_pass $target;
+            }
   sites.conf: |-
     # Ref: https://github.com/openresty/openresty/#resolvconf-parsing
     resolver local=on;
