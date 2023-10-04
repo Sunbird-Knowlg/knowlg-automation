@@ -524,7 +524,7 @@ data:
     # Need to depreacte 
     composite {
         search {
-            url : "http://search-service.knowlg.svc.cluster.local:9000/v3/search"
+            url : "http://search-service.{{ .Values.api_namespace }}.svc.cluster.local:9000/v3/search"
         }
     }
 
@@ -554,7 +554,7 @@ data:
     # DIAL Link Config
     dial_service {
         api {
-            base_url : "http://dial-service.knowlg.svc.cluster.local:9000"
+            base_url : "http://dial-service.{{ .Values.api_namespace }}.svc.cluster.local:9000"
             auth_key : ""
             search : "/dialcode/v3/search"
             generate : "/dialcode/v3/generate"
@@ -659,9 +659,9 @@ data:
 
     # Need to depreacte 
     #Collection CSV
-    sunbird_dialcode_search_api="http://dial-service.knowlg.svc.cluster.local:9000/dialcode/v3/list"
+    sunbird_dialcode_search_api="http://dial-service.{{ .Values.api_namespace }}.svc.cluster.local:9000/dialcode/v3/list"
     framework_read_api_url="http://localhost:8080/learning-service/framework/v3/read"
-    sunbird_link_dial_code_api="http://content-service.knowlg.svc.cluster.local:9000/collection/v4/dialcode/link"
+    sunbird_link_dial_code_api="http://content-service.{{ .Values.api_namespace }}.svc.cluster.local:9000/collection/v4/dialcode/link"
 
     # Need to depreacte 
     collection {
