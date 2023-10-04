@@ -6,7 +6,7 @@ env:
   javaoptions: -Xmx600m
 
 replicaCount: 1
-repository: docker.io/maheshkg/taxonomy-service
+repository: docker.io/sanketikahub/taxonomy-service
 image_tag: R5.7.0
 resources:
   requests:

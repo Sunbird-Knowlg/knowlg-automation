@@ -6,8 +6,8 @@ env:
 replicaCount: 1
 #repository: docker.io/aimansharief/content-service-modified2
 #image_tag: R5.7.0
-repository: docker.io/maheshkg/content-service
-image_tag: R5.7.2
+repository: docker.io/sanketikahub/content-service
+image_tag: R5.7.0
 resources:
   requests:
     cpu: 100m

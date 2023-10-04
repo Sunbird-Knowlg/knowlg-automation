@@ -4,7 +4,7 @@ env:
   javaoptions: -Xmx600m
 
 replicaCount: 1
-repository: docker.io/aimansharief/dial-service
+repository: docker.io/sanketikahub/dial-service
 image_tag: R5.4.0
 resources:
   requests:
