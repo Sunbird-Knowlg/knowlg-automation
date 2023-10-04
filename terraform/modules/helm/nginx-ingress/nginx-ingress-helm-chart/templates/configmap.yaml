@@ -43,6 +43,91 @@ data:
       proxy_set_header Host $host;
       proxy_pass $target;
     }
+    location /framework/v3/ {
+          set $target http://taxonomy-service.knowlg-api.svc.cluster.local:9000;
+          rewrite ^/framework/v3/(.*) /framework/v3/$1 break;
+          proxy_http_version 1.1;
+          proxy_set_header Host $host;
+          proxy_pass $target;
+        }
+    location /object/category/v4/ {
+              set $target http://taxonomy-service.knowlg-api.svc.cluster.local:9000;
+              rewrite ^/object/category/v4/(.*) /object/category/v4/$1 break;
+              proxy_http_version 1.1;
+              proxy_set_header Host $host;
+              proxy_pass $target;
+            }
+    location /object/category/definition/v4/ {
+              set $target http://taxonomy-service.knowlg-api.svc.cluster.local:9000;
+              rewrite ^/object/category/definition/v4/(.*) /object/category/definition/v4/$1 break;
+              proxy_http_version 1.1;
+              proxy_set_header Host $host;
+              proxy_pass $target;
+            }
+    location /v1/lock/ {
+              set $target http://taxonomy-service.knowlg-api.svc.cluster.local:9000;
+              rewrite ^/v1/lock/(.*) /v1/lock/$1 break;
+              proxy_http_version 1.1;
+              proxy_set_header Host $host;
+              proxy_pass $target;
+            }
+    location /dialcode/v3/ {
+              set $target http://dialcode-service.knowlg-api.svc.cluster.local:9000;
+              rewrite ^/dialcode/v3/(.*) /dialcode/v3/$1 break;
+              proxy_http_version 1.1;
+              proxy_set_header Host $host;
+              proxy_pass $target;
+            }
+    location /dialcode/v4/ {
+              set $target http://dialcode-service.knowlg-api.svc.cluster.local:9000;
+              rewrite ^/dialcode/v4/(.*) /dialcode/v4/$1 break;
+              proxy_http_version 1.1;
+              proxy_set_header Host $host;
+              proxy_pass $target;
+            }
+    location /v3/search {
+              set $target http://search-service.knowlg-api.svc.cluster.local:9000;
+              rewrite ^/v3/search /v3/search$1 break;
+              proxy_http_version 1.1;
+              proxy_set_header Host $host;
+              proxy_pass $target;
+            }
+    location /v3/private/search {
+              set $target http://search-service.knowlg-api.svc.cluster.local:9000;
+              rewrite ^/v3/private/search /v3/private/search$1 break;
+              proxy_http_version 1.1;
+              proxy_set_header Host $host;
+              proxy_pass $target;
+            }
+    location /v2/search/count {
+              set $target http://search-service.knowlg-api.svc.cluster.local:9000;
+              rewrite ^/v2/search/count  /v2/search/count$1 break;
+              proxy_http_version 1.1;
+              proxy_set_header Host $host;
+              proxy_pass $target;
+            }
+    location /v3/count {
+              set $target http://search-service.knowlg-api.svc.cluster.local:9000;
+              rewrite ^/v3/count  /v3/count$1 break;
+              proxy_http_version 1.1;
+              proxy_set_header Host $host;
+              proxy_pass $target;
+            }
+    location /v2/metrics {
+              set $target http://search-service.knowlg-api.svc.cluster.local:9000;
+              rewrite ^/v2/metrics  /v2/metrics$1 break;
+              proxy_http_version 1.1;
+              proxy_set_header Host $host;
+              proxy_pass $target;
+            }
+    location /v3/audit/ {
+              set $target http://search-service.knowlg-api.svc.cluster.local:9000;
+              rewrite ^/v3/audit/(.*) /v3/audit/$1 break;
+              proxy_http_version 1.1;
+              proxy_set_header Host $host;
+              proxy_pass $target;
+            }
+
   sites.conf: |-
     # Ref: https://github.com/openresty/openresty/#resolvconf-parsing
     resolver local=on;
