@@ -64,22 +64,15 @@ data:
               proxy_set_header Host $host;
               proxy_pass $target;
             }
-    location /v1/lock/ {
-              set $target http://taxonomy-service.knowlg-api.svc.cluster.local:9000;
-              rewrite ^/v1/lock/(.*) /v1/lock/$1 break;
-              proxy_http_version 1.1;
-              proxy_set_header Host $host;
-              proxy_pass $target;
-            }
     location /dialcode/v3/ {
-              set $target http://dialcode-service.knowlg-api.svc.cluster.local:9000;
+              set $target http://dial-service.knowlg-api.svc.cluster.local:9000;
               rewrite ^/dialcode/v3/(.*) /dialcode/v3/$1 break;
               proxy_http_version 1.1;
               proxy_set_header Host $host;
               proxy_pass $target;
             }
     location /dialcode/v4/ {
-              set $target http://dialcode-service.knowlg-api.svc.cluster.local:9000;
+              set $target http://dial-service.knowlg-api.svc.cluster.local:9000;
               rewrite ^/dialcode/v4/(.*) /dialcode/v4/$1 break;
               proxy_http_version 1.1;
               proxy_set_header Host $host;
