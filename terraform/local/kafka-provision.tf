@@ -36,7 +36,6 @@ provider "helm" {
          learning_job_request_topic = "dev.learning.job.request"
          learning_graph_events_topic = "dev.learning.graph.events"
          learning_events_failed_topic = "dev.learning.events.failed"
-         search_indexer_group_topic = "dev.search-indexer-group"
          qrimage_request_topic = "dev.qrimage.request"
          telemetry_raw_topic = "dev.telemetry.raw"
          dialcode_context_job_request_topic = "dev.dialcode.context.job.request"
