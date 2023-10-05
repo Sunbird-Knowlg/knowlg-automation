@@ -88,12 +88,6 @@ variable "kafka_learning_events_failed_topic" {
   default     = "learning.events.failed"
 }
 
-variable "kafka_search_indexer_group_topic" {
-  type        = string
-  description = "Kafka search.indexer.group topic"
-  default     = "search.indexer.group"
-}
-
 variable "kafka_qrimage_request_topic" {
   type        = string
   description = "Kafka qrimage.request topic"

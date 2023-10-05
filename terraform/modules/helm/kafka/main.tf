@@ -13,7 +13,6 @@ resource "helm_release" "kafka" {
         learning_job_request_topic = "${var.env}.${var.building_block}.${var.kafka_learning_job_request_topic}"
         learning_graph_events_topic = "${var.env}.${var.building_block}.${var.kafka_learning_graph_events_topic}"
         learning_events_failed_topic = "${var.env}.${var.building_block}.${var.kafka_learning_events_failed_topic}"
-        search_indexer_group_topic = "${var.env}.${var.building_block}.${var.kafka_search_indexer_group_topic}"
         qrimage_request_topic = "${var.env}.${var.building_block}.${var.kafka_qrimage_request_topic}"
         telemetry_raw_topic = "${var.env}.${var.building_block}.${var.kafka_telemetry_raw_topic}"
         dialcode_context_job_request_topic = "${var.env}.${var.building_block}.${var.kafka_dialcode_context_job_request_topic}"
