@@ -72,8 +72,8 @@ variable "kafka_content_postpublish_topic" {
 
 variable "kafka_learning_job_request_topic" {
   type        = string
-  description = "Kafka learning_job_request topic"
-  default     = "learning_job_request"
+  description = "Kafka learning.job.request topic"
+  default     = "learning.job.request"
 }
 
 variable "kafka_learning_graph_events_topic" {
@@ -90,8 +90,8 @@ variable "kafka_learning_events_failed_topic" {
 
 variable "kafka_search_indexer_group_topic" {
   type        = string
-  description = "Kafka search-indexer-group topic"
-  default     = "search-indexer-group"
+  description = "Kafka search.indexer.group topic"
+  default     = "search.indexer.group"
 }
 
 variable "kafka_qrimage_request_topic" {
