@@ -117,3 +117,9 @@ variable "kafka_dialcode_context_job_request_failed_topic" {
   description = "Kafka dialcode.context.job.request topic"
   default     = "dialcode.context.job.request.failed"
 }
+
+variable "kafka_auto_creation_job_request_topic" {
+  type        = string
+  description = "Kafka auto.creation.job.request topic"
+  default     = "auto.creation.job.request"
+}

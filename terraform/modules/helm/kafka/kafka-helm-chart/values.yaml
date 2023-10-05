@@ -1536,6 +1536,9 @@ provisioning:
   - name: "dev.knowlg.dialcode.context.job.request.failed"
     partitions: 1
     replicationFactor: 1
+  - name: "dev.knowlg.auto.creation.job.request"
+    partitions: 1
+    replicationFactor: 1
 
   ## @param provisioning.nodeSelector Node labels for pod assignment
   ## Ref: https://kubernetes.io/docs/user-guide/node-selection/

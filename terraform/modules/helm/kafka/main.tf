@@ -18,6 +18,7 @@ resource "helm_release" "kafka" {
         telemetry_raw_topic = "${var.env}.${var.building_block}.${var.kafka_telemetry_raw_topic}"
         dialcode_context_job_request_topic = "${var.env}.${var.building_block}.${var.kafka_dialcode_context_job_request_topic}"
         dialcode_context_job_request_failed_topic = "${var.env}.${var.building_block}.${var.kafka_dialcode_context_job_request_failed_topic}"
+        auto_creation_job_request = "${var.env}.${var.building_block}.${var.kafka_auto_creation_job_request_topic}"
       }
     )
   ]
