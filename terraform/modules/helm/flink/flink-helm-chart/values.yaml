@@ -2,7 +2,7 @@ namespace: "knowlg-job"
 imagepullsecrets: ""
 dockerhub: ""
 repository: "pallakartheekreddy/flink-jobs"
-image_tag: "R5.5.2"
+image_tag: "R5.8.0"
 # repository: "aimansharief/kp-jobs"
 # image_tag: "latest"
 serviceMonitor:
@@ -190,8 +190,8 @@ search-indexer:
 
   job_classname: org.sunbird.job.searchindexer.task.SearchIndexerStreamTask
 
-audit-event-generator:
-  audit-event-generator: |+
+transaction-event-processor:
+  transaction-event-processor: |+
     include file("/data/flink/conf/base-config.conf")
     job {
       env = "dev"
@@ -200,7 +200,7 @@ audit-event-generator:
     kafka {
       input.topic = "dev.knowlg.learning.graph.events"
       output.topic = "dev.knowlg.telemetry.raw"
-      groupId = "dev-audit-event-generator-group"
+      groupId = "dev-transaction-event-processor-group"
     }
 
     task {
@@ -211,10 +211,15 @@ audit-event-generator:
     }
 
     schema {
-      basePath = "https://knowlgdev.blob.core.windows.net/sunbird-content-staging-knowlg/schemas/local"
+      basePath = ${schema_base_path}
     }
 
     channel.default = "org.sunbird"
+
+    job {
+        audit-event-generator = true
+        audit-history-indexer = true
+    }
 
   flink-conf: |+
     jobmanager.memory.flink.size: 1024m
@@ -232,8 +237,7 @@ audit-event-generator:
     # classloader.resolve-order: "parent-first"
     # state.savepoints.dir: file:///tmp
 
-  job_classname: org.sunbird.job.auditevent.task.AuditEventGeneratorStreamTask
-
+  job_classname: org.sunbird.job.transaction.task.TransactionEventProcessorStreamTask
 
 asset-enrichment:
   asset-enrichment: |+
@@ -304,7 +308,6 @@ asset-enrichment:
 
   job_classname: org.sunbird.job.assetenricment.task.AssetEnrichmentStreamTask
 
-
 post-publish-processor:
   post-publish-processor: |+
     include file("/data/flink/conf/base-config.conf")
@@ -340,10 +343,10 @@ post-publish-processor:
     }
 
     service {
-      search.basePath = "http://localhost:9000/search"
+      search.basePath = "http://search-service.knowlg-api.svc.cluster.local:9000/search"
       lms.basePath = "http://localhost:9000/lms"
       learning_service.basePath = "http://localhost:8080/learning-service"
-      dial.basePath = "https://dev.sunbirded.org/dial/"
+      dial.basePath = "http://dial-service.knowlg-api.svc.cluster.local:9000/dial/"
     }
 
     dialcode {
@@ -380,7 +383,6 @@ post-publish-processor:
 
   job_classname: org.sunbird.job.postpublish.task.PostPublishProcessorStreamTask  
 
-
 dialcode-context-updater:
   dialcode-context-updater: |+
     include file("/data/flink/conf/base-config.conf")
@@ -410,8 +412,8 @@ dialcode-context-updater:
     }
 
     service {
-      search.basePath = "http://11.2.6.6/search"
-      dial_service.basePath = "http://11.2.6.6/dial"
+      search.basePath = "http://search-service.knowlg-api.svc.cluster.local:9000/search"
+      dial_service.basePath = "http://dial-service.knowlg-api.svc.cluster.local:9000/dial"
     }
 
     es_sync_wait_time = 5000
@@ -434,7 +436,6 @@ dialcode-context-updater:
     # state.savepoints.dir: file:///tmp
 
   job_classname: org.sunbird.job.dialcodecontextupdater.task.DialcodeContextUpdaterStreamTask  
-
 
 qrcode-image-generator:
   qrcode-image-generator: |+
@@ -530,7 +531,7 @@ video-stream-generator:
 
     service {
       content {
-        basePath = "http://11.2.6.6/content"
+        basePath = " http://content-service.knowlg-api.svc.cluster.local:9000/content"
       }
     }
 
@@ -621,44 +622,6 @@ video-stream-generator:
     # state.savepoints.dir: file:///tmp
 
   job_classname: org.sunbird.job.videostream.task.VideoStreamGeneratorStreamTask     
-
-audit-history-indexer:
-  audit-history-indexer: |+
-    include file("/data/flink/conf/base-config.conf")
-    job {
-      env = "dev"
-    }
-
-    kafka {
-      input.topic = "dev.knowlg.learning.graph.events"
-      groupId = "dev-audit-history-indexer-group"
-    }
-
-    task {
-      consumer.parallelism = 1
-      parallelism = 1
-      window.time = 60
-    }
-
-    timezone = "IST"
-
-  flink-conf: |+
-    jobmanager.memory.flink.size: 1024m
-    taskmanager.memory.flink.size: 1024m
-    taskmanager.numberOfTaskSlots: 1
-    jobManager.numberOfTaskSlots: 1
-    parallelism.default: 1
-    jobmanager.execution.failover-strategy: region
-    taskmanager.memory.network.fraction: 0.1
-    scheduler-mode: reactive
-    heartbeat.timeout: 8000
-    heartbeat.interval: 5000
-    taskmanager.memory.process.size: 1700m
-    jobmanager.memory.process.size: 1600m
-    # classloader.resolve-order: "parent-first"
-    # state.savepoints.dir: file:///tmp
-
-  job_classname: org.sunbird.job.audithistory.task.AuditHistoryIndexerStreamTask       
 
 content-publish:
   content-publish: |+

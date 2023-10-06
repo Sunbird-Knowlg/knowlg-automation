@@ -701,5 +701,5 @@ data:
       relative_path_prefix="{{ .Values.cloudstorage_relative_path_prefix_content }}"
       metadata.list=["appIcon", "artifactUrl", "posterImage", "previewUrl", "thumbnail", "assetsMap", "certTemplate", "itemSetPreviewUrl", "grayScaleAppIcon", "sourceURL", "variants", "downloadUrl", "streamingUrl", "toc_url", "data", "question", "solutions", "editorState", "media", "pdfUrl", "transcripts"]
       read_base_path="{{ .Values.cloudstorage_read_base_path }}"
-      write_base_path=["https://knowlgdev.blob.core.windows.net", "https://sunbirddevbbpublic.blob.core.windows.net"]
+      write_base_path=["https://{{ .Values.cloud_storage_key }}.blob.core.windows.net", "https://sunbirddevbbpublic.blob.core.windows.net"]
     }

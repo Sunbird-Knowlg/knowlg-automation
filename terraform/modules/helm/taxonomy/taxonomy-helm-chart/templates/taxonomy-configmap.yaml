@@ -364,7 +364,6 @@ data:
 
     play.http.parser.maxMemoryBuffer = 50MB
     akka.http.parsing.max-content-length = 50MB
-    #schema.base_path="https://knowlgdev.blob.core.windows.net/sunbird-content-staging-knowlg/schemas/local"
     schema.base_path="{{ .Values.schema_base_path }}"
 
     # Cassandra Configuration
@@ -444,10 +443,10 @@ data:
     objectcategorydefinition.keyspace="{{ .Values.objectcategorydefinition_keyspace }}"
 
     # Framework master category validation Supported values are Yes/No
-    master.category.validation.enabled="Yes"
+    master.category.validation.enabled= "{{ .Values.master_category_validation_enabled }}"
     
-    framework.keyspace="dev_hierarchy_store"
-    framework.hierarchy.table="framework_hierarchy"
+    framework.keyspace="{{ .Values.framework_keyspace }}"
+    framework.hierarchy.table="{{ .Values.framework_hierarchy_table }}"
     framework.categories_cached=["subject", "medium", "gradeLevel", "board"]
     framework.cache.ttl=86400
     framework.cache.read=true

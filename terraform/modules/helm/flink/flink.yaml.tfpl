@@ -102,10 +102,10 @@ post-publish-processor:
     }
 
     service {
-      search.basePath = "http://localhost:9000/search"
+      search.basePath = "http://search-service.knowlg-api.svc.cluster.local:9000/search"
       lms.basePath = "http://localhost:9000/lms"
       learning_service.basePath = "http://localhost:8080/learning-service"
-      dial.basePath = "https://dev.sunbirded.org/dial/"
+      dial.basePath = "http://dial-service.knowlg-api.svc.cluster.local:9000/dial/"
     }
 
     dialcode {
@@ -181,8 +181,8 @@ qrcode-image-generator:
 
     cloudstorage.metadata.replace_absolute_path=false
     cloudstorage.relative_path_prefix= "DIAL_STORAGE_BASE_PATH"
-    cloudstorage.read_base_path="https://knowlgdev.blob.core.windows.net"
-    cloudstorage.write_base_path=["https://knowlgdev.blob.core.windows.net/dial","https://obj.dev.sunbird.org/dial"]
+    cloudstorage.read_base_path="https://${cloud_storage_key}.blob.core.windows.net"
+    cloudstorage.write_base_path=["https://${cloud_storage_key}.blob.core.windows.net/dial","https://obj.dev.sunbird.org/dial"]
     cloudstorage.metadata.list=["appIcon","posterImage","artifactUrl","downloadUrl","variants","previewUrl","pdfUrl", "streamingUrl", "toc_url"]
 
     cloud_storage_type="${cloud_storage_type}"
@@ -405,3 +405,52 @@ content-publish:
     # state.savepoints.dir: file:///tmp
 
   job_classname: org.sunbird.job.content.task.ContentPublishStreamTask  
+
+transaction-event-processor:
+  transaction-event-processor: |+
+    include file("/data/flink/conf/base-config.conf")
+    job {
+      env = "dev"
+    }
+
+    kafka {
+      input.topic = "dev.knowlg.learning.graph.events"
+      output.topic = "dev.knowlg.telemetry.raw"
+      groupId = "dev-transaction-event-processor-group"
+    }
+
+    task {
+    consumer.parallelism = 1
+    parallelism = 1
+    producer.parallelism = 1
+    window.time = 60
+    }
+
+    schema {
+      basePath = ${schema_base_path}
+    }
+
+    channel.default = "org.sunbird"
+
+    job {
+        audit-event-generator = true
+        audit-history-indexer = true
+    }
+
+  flink-conf: |+
+    jobmanager.memory.flink.size: 1024m
+    taskmanager.memory.flink.size: 1024m
+    taskmanager.numberOfTaskSlots: 1
+    jobManager.numberOfTaskSlots: 1
+    parallelism.default: 1
+    jobmanager.execution.failover-strategy: region
+    taskmanager.memory.network.fraction: 0.1
+    scheduler-mode: reactive
+    heartbeat.timeout: 8000
+    heartbeat.interval: 5000
+    taskmanager.memory.process.size: 1700m
+    jobmanager.memory.process.size: 1600m
+    # classloader.resolve-order: "parent-first"
+    # state.savepoints.dir: file:///tmp
+
+  job_classname: org.sunbird.job.transaction.task.TransactionEventProcessorStreamTask
