@@ -3,14 +3,17 @@ kind: PersistentVolume
 metadata:
   name: neo4j-storage
   labels:
-    app: neo4j
+    app.kubernetes.io/component: neo4j
+    app.kubernetes.io/instance: neo4j
+    app.kubernetes.io/name: neo4j
+  annotations: {}
 spec:
   capacity:
     storage: 2Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: default
+  storageClassName: ""
   hostPath:
     path: /data
 ---
