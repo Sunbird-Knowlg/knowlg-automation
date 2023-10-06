@@ -2,9 +2,7 @@ namespace: "knowlg-job"
 imagepullsecrets: ""
 dockerhub: ""
 repository: "pallakartheekreddy/flink-jobs"
-image_tag: "R5.8.0"
-# repository: "aimansharief/kp-jobs"
-# image_tag: "latest"
+image_tag: "R5.8.1"
 serviceMonitor:
   enabled: false
 replicaCount: 1
@@ -199,7 +197,8 @@ transaction-event-processor:
 
     kafka {
       input.topic = "dev.knowlg.learning.graph.events"
-      output.topic = "dev.knowlg.telemetry.raw"
+      output.audit.topic = "dev.knowlg.telemetry.raw"
+      output.obsrv.topic = "dev.knowlg.transaction.meta"
       groupId = "dev-transaction-event-processor-group"
     }
 
@@ -219,6 +218,7 @@ transaction-event-processor:
     job {
         audit-event-generator = true
         audit-history-indexer = true
+        obsrv-metadata-generator = true
     }
 
   flink-conf: |+

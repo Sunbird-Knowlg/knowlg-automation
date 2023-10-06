@@ -8,16 +8,17 @@ resource "helm_release" "kafka" {
   values = [
     templatefile("${path.module}/${var.kafka_chart_custom_values_yaml}",
       {
-        content_publish_topic = "${var.env}.${var.building_block}.${var.kafka_content_publish_topic}"
-        content_postpublish_topic = "${var.env}.${var.building_block}.${var.kafka_content_postpublish_topic}"
-        learning_job_request_topic = "${var.env}.${var.building_block}.${var.kafka_learning_job_request_topic}"
-        learning_graph_events_topic = "${var.env}.${var.building_block}.${var.kafka_learning_graph_events_topic}"
-        learning_events_failed_topic = "${var.env}.${var.building_block}.${var.kafka_learning_events_failed_topic}"
-        qrimage_request_topic = "${var.env}.${var.building_block}.${var.kafka_qrimage_request_topic}"
-        telemetry_raw_topic = "${var.env}.${var.building_block}.${var.kafka_telemetry_raw_topic}"
-        dialcode_context_job_request_topic = "${var.env}.${var.building_block}.${var.kafka_dialcode_context_job_request_topic}"
-        dialcode_context_job_request_failed_topic = "${var.env}.${var.building_block}.${var.kafka_dialcode_context_job_request_failed_topic}"
-        auto_creation_job_request = "${var.env}.${var.building_block}.${var.kafka_auto_creation_job_request_topic}"
+        content_publish_topic                       = "${var.env}.${var.building_block}.${var.kafka_content_publish_topic}"
+        content_postpublish_topic                   = "${var.env}.${var.building_block}.${var.kafka_content_postpublish_topic}"
+        learning_job_request_topic                  = "${var.env}.${var.building_block}.${var.kafka_learning_job_request_topic}"
+        learning_graph_events_topic                 = "${var.env}.${var.building_block}.${var.kafka_learning_graph_events_topic}"
+        learning_events_failed_topic                = "${var.env}.${var.building_block}.${var.kafka_learning_events_failed_topic}"
+        qrimage_request_topic                       = "${var.env}.${var.building_block}.${var.kafka_qrimage_request_topic}"
+        telemetry_raw_topic                         = "${var.env}.${var.building_block}.${var.kafka_telemetry_raw_topic}"
+        dialcode_context_job_request_topic          = "${var.env}.${var.building_block}.${var.kafka_dialcode_context_job_request_topic}"
+        dialcode_context_job_request_failed_topic   = "${var.env}.${var.building_block}.${var.kafka_dialcode_context_job_request_failed_topic}"
+        auto_creation_job_request_topic                   = "${var.env}.${var.building_block}.${var.kafka_auto_creation_job_request_topic}"
+        transaction_meta_topic                           = "${var.env}.${var.building_block}.${var.kafka_transaction_meta_topic}"
       }
     )
   ]

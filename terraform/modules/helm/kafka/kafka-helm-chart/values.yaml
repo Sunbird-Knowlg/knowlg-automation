@@ -681,7 +681,7 @@ pdb:
 service:
   ## @param service.type Kubernetes Service type
   ##
-  type: ClusterIP
+  type: LoadBalancer
   ## @param service.ports.client Kafka svc port for client connections
   ## @param service.ports.internal Kafka svc port for inter-broker connections
   ## @param service.ports.external Kafka svc port for external connections
@@ -1534,6 +1534,9 @@ provisioning:
     partitions: 1
     replicationFactor: 1
   - name: "dev.knowlg.auto.creation.job.request"
+    partitions: 1
+    replicationFactor: 1
+  - name: "dev.knowlg.transaction.meta"
     partitions: 1
     replicationFactor: 1
 

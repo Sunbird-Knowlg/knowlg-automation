@@ -40,6 +40,7 @@ provider "helm" {
          telemetry_raw_topic = "dev.telemetry.raw"
          dialcode_context_job_request_topic = "dev.dialcode.context.job.request"
          dialcode_context_job_request_failed_topic = "dev.dialcode.context.job.request.failed"
+         transaction_meta_topic = "dev.transaction.meta"
        }
      )
    ]

@@ -1,3 +1,66 @@
+base_config: |
+  kafka {
+    broker-servers = "kafka-headless.knowlg-db.svc.cluster.local:9092"
+    producer.broker-servers = "kafka-headless.knowlg-db.svc.cluster.local:9092"
+    consumer.broker-servers = "kafka-headless.knowlg-db.svc.cluster.local:9092"
+    zookeeper = "kafka-zookeeper-headless.knowlg-db.svc.cluster.local:2181"
+    producer {
+      max-request-size = 1572864
+      batch.size = 98304
+      linger.ms = 10
+      compression = "snappy"
+    }
+    output.system.event.topic = "dev.knowlg.system.events"
+  }
+  job {
+    env = "knowlgdev"
+    enable.distributed.checkpointing = false
+    statebackend {
+      blob {
+        storage {
+          account = "${cloud_storage_key}.blob.core.windows.net"
+          container = "flink-check-points-store"
+          checkpointing.dir = "checkpoint"
+        }
+      }
+      base.url = "wasbs://"$${job.statebackend.blob.storage.container}"@"$${job.statebackend.blob.storage.account}"/"$${job.statebackend.blob.storage.checkpointing.dir}
+    }
+  }
+  task {
+    parallelism = 1
+    consumer.parallelism = 1
+    checkpointing.compressed = true
+    checkpointing.interval = 10
+    checkpointing.pause.between.seconds = 3000
+    restart-strategy.attempts = 3
+    restart-strategy.delay = 30000 # in milli-seconds
+  }
+
+  redis {
+    host = redis-master.knowlg-db.svc.cluster.local
+    port = 6379
+    connection {
+      max = 2
+      idle.min = 1
+      idle.max = 2
+      minEvictableIdleTimeSeconds = 120
+      timeBetweenEvictionRunsSeconds = 300
+    }
+  }
+  lms-cassandra {
+    host = cassandra.knowlg-db.svc.cluster.local
+    port = "9042"
+  }
+
+  neo4j {
+    routePath = "bolt://neo4j.knowlg-db.svc.cluster.local:7687"
+    graph = "domain"
+  }
+
+  es {
+    basePath = "elasticsearch.knowlg-db.svc.cluster.local:9200"
+  }
+
 asset-enrichment:
   asset-enrichment: |+
     include file("/data/flink/conf/base-config.conf")
@@ -181,7 +244,7 @@ qrcode-image-generator:
 
     cloudstorage.metadata.replace_absolute_path=false
     cloudstorage.relative_path_prefix= "DIAL_STORAGE_BASE_PATH"
-    cloudstorage.read_base_path="https://${cloud_storage_key}.blob.core.windows.net"
+    cloudstorage.read_base_path="https://knowlgdev.blob.core.windows.net"
     cloudstorage.write_base_path=["https://${cloud_storage_key}.blob.core.windows.net/dial","https://obj.dev.sunbird.org/dial"]
     cloudstorage.metadata.list=["appIcon","posterImage","artifactUrl","downloadUrl","variants","previewUrl","pdfUrl", "streamingUrl", "toc_url"]
 
@@ -415,7 +478,8 @@ transaction-event-processor:
 
     kafka {
       input.topic = "dev.knowlg.learning.graph.events"
-      output.topic = "dev.knowlg.telemetry.raw"
+      output.audit.topic = "dev.knowlg.telemetry.raw"
+      output.obsrv.topic = "dev.knowlg.transaction.meta"
       groupId = "dev-transaction-event-processor-group"
     }
 
@@ -427,7 +491,7 @@ transaction-event-processor:
     }
 
     schema {
-      basePath = ${schema_base_path}
+      basePath = "${schema_base_path}"
     }
 
     channel.default = "org.sunbird"
@@ -435,6 +499,7 @@ transaction-event-processor:
     job {
         audit-event-generator = true
         audit-history-indexer = true
+        obsrv-metadata-generator = true
     }
 
   flink-conf: |+

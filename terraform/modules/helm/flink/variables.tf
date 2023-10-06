@@ -53,7 +53,7 @@ variable "flink_kubernetes_service_name" {
 variable "flink_release_name" {
   type        = list(string)
   description = "Flink helm release name."
-  default     = ["content-publish", "search-indexer","audit-event-generator","asset-enrichment","post-publish-processor","dialcode-context-updater", "qrcode-image-generator","video-stream-generator","audit-history-indexer"]
+  default     = ["content-publish", "search-indexer","transaction-event-processor","asset-enrichment","post-publish-processor","dialcode-context-updater", "qrcode-image-generator","video-stream-generator"]
 }
 
 variable "flink_chart_custom_values_yaml" {

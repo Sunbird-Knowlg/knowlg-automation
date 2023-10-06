@@ -117,3 +117,9 @@ variable "kafka_auto_creation_job_request_topic" {
   description = "Kafka auto.creation.job.request topic"
   default     = "auto.creation.job.request"
 }
+
+variable "kafka_transaction_meta_topic" {
+  type        = string
+  description = "Kafka transaction.meta topic"
+  default     = "transaction.meta"
+}

@@ -27,6 +27,12 @@ provisioning:
   - name: "${dialcode_context_job_request_failed_topic}"
     partitions: 1
     replicationFactor: 1
+  - name: "${auto_creation_job_request_topic}"
+    partitions: 1
+    replicationFactor: 1
+  - name: "${transaction_meta_topic}"
+    partitions: 1
+    replicationFactor: 1 
 
 persistence:
   size: 10Gi
