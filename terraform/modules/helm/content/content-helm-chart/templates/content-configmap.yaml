@@ -537,6 +537,10 @@ data:
     # Google Drive APIKEY
     learning_content_drive_apiKey = ""
 
+    #DIAL Code Reserve configuration
+    kafka.dial.request.topic="dev.knowlg.qrimage.request"
+    dialcode.keyspace=dialcodes
+
     #Youtube Standard Licence Validation
     learning.content.youtube.application.name=""
     learning_content_youtube_apikey=""

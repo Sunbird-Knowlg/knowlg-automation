@@ -188,12 +188,16 @@ data:
     dialcode.max_count=1000
 
     # System Configuration
-    system.config.keyspace.name="{{ .Values.system_config_keyspace_name}}"
-    system.config.table="{{ .Values.system_config_table}}"
+    system.config.keyspace.name="{{ .Values.systemconfig_keyspace_name}}"
+    system.config.table="{{ .Values.systemconfig_table}}"
 
     #Publisher Configuration
-    publisher.keyspace.name="{{ .Values.system_config_table}}"
+    publisher.keyspace.name="{{ .Values.publisher_keyspace_name}}"
     publisher.keyspace.table="{{ .Values.publisher_keyspace_table}}"
+
+    #QR coddes
+    qrcodes.keyspace.name="{{ .Values.qrcodes_keyspace_name}}"
+    qrcodes.keyspace.table="{{ .Values.qrcodes_keyspace_table}}"
 
     #DIAL Code Generator Configuration
     dialcode.strip.chars="0"
@@ -208,7 +212,6 @@ data:
     cassandra.lp.connection="{{ .Values.cassandra_connection }}"
     cassandra.lpa.connection="{{ .Values.cassandra_connection }}"
 
-
     # Consistency Level for Multi Node Cassandra cluster
     #cassandra.lp.consistency.level=QUORUM
 
@@ -216,7 +219,7 @@ data:
     kafka {
       urls = "{{ .Values.kafka_connection}}"
       topic {
-        send_enable = false
+        send_enable = true
         graph_event = "{{ .Values.graph_event}}"
       }
     }
@@ -229,6 +232,12 @@ data:
         sb_schema = ["http://store.knowlg.sunbird.org/dial/specs/sbed/schema.jsonld"]
     }
 
-    dial_id =  "https://dev.sunbirded.org/dial/{dialcode}"
-    dial_type = "https://dev.sunbirded.org/ns/"
+    cloudstorage {  
+        metadata.replace_absolute_path="false" 
+        relative_path_prefix="DIAL_STORAGE_BASE_PATH"
+        read_base_path="https://knowlgdevbad2564c.blob.core.windows.net"
+    }
+
+    dial_id =  "https://dev.knowlg.sunbirded.org/dial/{dialcode}"
+    dial_type = "https://dev.knowlg.sunbirded.org/ns/"
 
