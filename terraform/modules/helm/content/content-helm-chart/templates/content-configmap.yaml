@@ -542,8 +542,8 @@ data:
     dialcode.keyspace=dialcodes
 
     #Youtube Standard Licence Validation
-    learning.content.youtube.application.name=""
-    learning_content_youtube_apikey=""
+    learning.content.youtube.application.name="{{ .Values.learning_content_youtube_application_name }}"
+    learning_content_youtube_apikey="{{ .Values.learning_content_youtube_apikey }}"
     youtube.license.regex.pattern=["\\?vi?=([^&]*)", "watch\\?.*v=([^&]*)", "(?:embed|vi?)/([^/?]*)","^([A-Za-z0-9\\-\\_]*)"]
     learning.valid_license=["creativeCommon"]
 

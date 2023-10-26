@@ -6,8 +6,8 @@ env:
 replicaCount: 1
 #repository: docker.io/aimansharief/content-service-modified2
 #image_tag: R5.7.0
-repository: docker.io/pallakartheekreddy/content-service
-image_tag: R5.8.6
+repository: docker.io/shouryasolanki/content-service
+image_tag: R5.8.2
 resources:
   requests:
     cpu: 100m
@@ -48,3 +48,6 @@ cloud_storage_type: ${cloud_storage_type}
 cloud_storage_key: ${cloud_storage_key}
 cloud_storage_secret: ${cloud_storage_secret}
 cloud_storage_container: ${cloud_storage_container}
+learning_content_youtube_apikey: ""
+learning_content_youtube_application_name: "fetch-youtube-license"
+learning_valid_license: ["creativeCommon"]

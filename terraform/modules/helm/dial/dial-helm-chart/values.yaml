@@ -36,3 +36,4 @@ qrcodes_keyspace_table: dialcode_batch
 dialcode_object_type: DialCode
 graph_event: dev.knowlg.learning.graph.events
 dial_request_topic: dev.knowlg.qrimage.request
+dialocode_object_type: DialCode
