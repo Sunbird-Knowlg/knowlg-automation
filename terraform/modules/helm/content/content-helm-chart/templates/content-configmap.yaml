@@ -426,8 +426,8 @@ data:
         }
         h5p {
             library {
-            path: "https://sunbirdpublic.blob.core.windows.net/installation/h5p-standalone-1.3.4.zip"
-        }
+                path: "https://sunbirdpublic.blob.core.windows.net/installation/h5p-standalone-1.3.4.zip"
+            }
         }
         copy {
             invalid_statusList: ["Flagged","FlaggedDraft","FraggedReview","Retired", "Processing"]
@@ -704,6 +704,6 @@ data:
       metadata.replace_absolute_path=true
       relative_path_prefix="{{ .Values.cloudstorage_relative_path_prefix_content }}"
       metadata.list=["appIcon", "artifactUrl", "posterImage", "previewUrl", "thumbnail", "assetsMap", "certTemplate", "itemSetPreviewUrl", "grayScaleAppIcon", "sourceURL", "variants", "downloadUrl", "streamingUrl", "toc_url", "data", "question", "solutions", "editorState", "media", "pdfUrl", "transcripts"]
-      read_base_path="{{ .Values.cloudstorage_read_base_path }}"
-      write_base_path=["https://{{ .Values.cloud_storage_key }}.blob.core.windows.net", "https://sunbirddevbbpublic.blob.core.windows.net"]
+      read_base_path="https://{{ .Values.cloud_storage_key }}.blob.core.windows.net"
+      write_base_path=["https://{{ .Values.cloud_storage_key }}.blob.core.windows.net"]
     }

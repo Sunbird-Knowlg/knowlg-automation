@@ -23,7 +23,6 @@ strategy:
   maxsurge: 25%
   maxunavailable: 25%
 serviceType: LoadBalancer
-#cassandra_connection: cassandra-db.knowlg-db.svc.cluster.local:9042
 cassandra_connection: cassandra.knowlg-db.svc.cluster.local:9042
 redis_connection: redis-master.knowlg-db.svc.cluster.local
 neo4j_domain_connection: neo4j.knowlg-db.svc.cluster.local:7687
@@ -41,8 +40,8 @@ cloud_storage_ecar_folder: "ecar_files"
 cloud_storage_upload_url_ttl: "54000"
 cloudstorage_relative_path_prefix_content: CONTENT_STORAGE_BASE_PATH
 cloudstorage_metadata_list: ["appIcon", "artifactUrl", "posterImage", "previewUrl", "thumbnail", "assetsMap", "certTemplate", "itemSetPreviewUrl", "grayScaleAppIcon", "sourceURL", "variants", "downloadUrl", "streamingUrl", "toc_url", "data", "question", "solutions", "editorState", "media", "pdfUrl", "transcripts"]
-cloudstorage_read_base_path: "https://sunbirddevbbpublic.blob.core.windows.net"
-cloudstorage_write_base_path: ["https://sunbirdstagingpublic.blob.core.windows.net", "https://sunbirddevbbpublic.blob.core.windows.net"]
+#cloudstorage_read_base_path: "https://sunbirddevbbpublic.blob.core.windows.net"
+#cloudstorage_write_base_path: ["https://sunbirdstagingpublic.blob.core.windows.net", "https://sunbirddevbbpublic.blob.core.windows.net"]
 schema_base_path: ${schema_base_path}
 cloud_storage_type: ${cloud_storage_type}
 cloud_storage_key: ${cloud_storage_key}

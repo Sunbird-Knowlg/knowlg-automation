@@ -30,7 +30,7 @@ base_config: |
     parallelism = 1
     consumer.parallelism = 1
     checkpointing.compressed = true
-    checkpointing.interval = 10
+    checkpointing.interval = 60000
     checkpointing.pause.between.seconds = 3000
     restart-strategy.attempts = 3
     restart-strategy.delay = 30000 # in milli-seconds
@@ -99,10 +99,10 @@ asset-enrichment:
       size.pixel = 150
     }
 
-    cloudstorage.metadata.replace_absolute_path=false
+    cloudstorage.metadata.replace_absolute_path=true
     cloudstorage.relative_path_prefix= "CONTENT_STORAGE_BASE_PATH"
-    cloudstorage.read_base_path="https://knowlgdev.blob.core.windows.net"
-    cloudstorage.write_base_path=["https://knowlgdev.blob.core.windows.net","https://obj.dev.sunbird.org"]
+    cloudstorage.read_base_path="https://${cloud_storage_key}.blob.core.windows.net"
+    cloudstorage.write_base_path=["https://${cloud_storage_key}.blob.core.windows.net", "https://obj.dev.sunbird.org"]
     cloudstorage.metadata.list=["appIcon","posterImage","artifactUrl","downloadUrl","variants","previewUrl","pdfUrl", "streamingUrl", "toc_url"]
 
     cloud_storage_type="${cloud_storage_type}"
@@ -175,9 +175,9 @@ post-publish-processor:
       linkable.primaryCategory = ["Course"]
     }
 
-    cloudstorage.metadata.replace_absolute_path=false
-    cloudstorage.read_base_path="https://knowlgdev.blob.core.windows.net"
-    cloudstorage.write_base_path=["https://knowlgdev.blob.core.windows.net","https://obj.dev.sunbird.org"]
+    cloudstorage.metadata.replace_absolute_path=true
+    cloudstorage.read_base_path="https://${cloud_storage_key}.blob.core.windows.net"
+    cloudstorage.write_base_path=["https://${cloud_storage_key}.blob.core.windows.net", "https://obj.dev.sunbird.org"]
     cloudstorage.metadata.list=["appIcon","posterImage","artifactUrl","downloadUrl","variants","previewUrl","pdfUrl", "streamingUrl", "toc_url"]
 
     cloud_storage_type="${cloud_storage_type}"
@@ -242,10 +242,10 @@ qrcode-image-generator:
     # Default value is 120
     max_allowed_character_for_file_name = 120
 
-    cloudstorage.metadata.replace_absolute_path=false
+    cloudstorage.metadata.replace_absolute_path=true
     cloudstorage.relative_path_prefix= "DIAL_STORAGE_BASE_PATH"
-    cloudstorage.read_base_path="https://knowlgdev.blob.core.windows.net"
-    cloudstorage.write_base_path=["https://${cloud_storage_key}.blob.core.windows.net/dial","https://obj.dev.sunbird.org/dial"]
+    cloudstorage.read_base_path="https://${cloud_storage_key}.blob.core.windows.net"
+    cloudstorage.write_base_path=["https://${cloud_storage_key}.blob.core.windows.net/dial", "https://obj.dev.sunbird.org/dial"]
     cloudstorage.metadata.list=["appIcon","posterImage","artifactUrl","downloadUrl","variants","previewUrl","pdfUrl", "streamingUrl", "toc_url"]
 
     cloud_storage_type="${cloud_storage_type}"
@@ -439,10 +439,10 @@ content-publish:
     max_allowed_content_name = 120
     enableDIALContextUpdate = "Yes"
 
-    cloudstorage.metadata.replace_absolute_path=false
-    cloudstorage.relative_path_prefix= "CLOUD_STORAGE_BASE_PATH"
-    cloudstorage.read_base_path="https://knowlgdev.blob.core.windows.net"
-    cloudstorage.write_base_path=["https://knowlgdev.blob.core.windows.net","https://obj.dev.sunbird.org"]
+    cloudstorage.metadata.replace_absolute_path=true
+    cloudstorage.relative_path_prefix="CONTENT_STORAGE_BASE_PATH"
+    cloudstorage.read_base_path="https://${cloud_storage_key}.blob.core.windows.net"
+    cloudstorage.write_base_path=["https://${cloud_storage_key}.blob.core.windows.net", "https://obj.dev.sunbird.org"]
     cloudstorage.metadata.list=["appIcon","posterImage","artifactUrl","downloadUrl","variants","previewUrl","pdfUrl", "streamingUrl", "toc_url"]
 
     cloud_storage_type="${cloud_storage_type}"
