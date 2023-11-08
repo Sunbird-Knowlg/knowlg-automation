@@ -1,7 +1,7 @@
 
-CREATE KEYSPACE lock_db WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+CREATE KEYSPACE IF NOT EXISTS lock_db WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
-CREATE TABLE lock_db.lock (
+CREATE TABLE IF NOT EXISTS lock_db.lock (
     "resourceId" text,
     "resourceType" text,
     "createdBy" text,
@@ -30,9 +30,9 @@ CREATE TABLE lock_db.lock (
 CREATE INDEX lock_lockid_idx ON lock_db.lock ("lockId");
 
 
-CREATE KEYSPACE dev_script_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+CREATE KEYSPACE IF NOT EXISTS dev_script_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
-CREATE TABLE dev_script_store.script_data (
+CREATE TABLE IF NOT EXISTS dev_script_store.script_data (
     name text PRIMARY KEY,
     reqmap text,
     type text
@@ -51,9 +51,9 @@ CREATE TABLE dev_script_store.script_data (
     AND read_repair_chance = 0.0
     AND speculative_retry = '99PERCENTILE';
 
-CREATE KEYSPACE content_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+CREATE KEYSPACE IF NOT EXISTS content_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
-CREATE TABLE content_store.content_data (
+CREATE TABLE IF NOT EXISTS content_store.content_data (
     content_id text PRIMARY KEY,
     body blob
 ) WITH bloom_filter_fp_chance = 0.01
@@ -72,9 +72,9 @@ CREATE TABLE content_store.content_data (
     AND speculative_retry = '99PERCENTILE';
 
 
-CREATE KEYSPACE dev_dialcode_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+CREATE KEYSPACE IF NOT EXISTS dev_dialcode_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
-CREATE TABLE dev_dialcode_store.publisher (
+CREATE TABLE IF NOT EXISTS dev_dialcode_store.publisher (
     identifier text PRIMARY KEY,
     channel text,
     created_on text,
@@ -95,7 +95,7 @@ CREATE TABLE dev_dialcode_store.publisher (
     AND read_repair_chance = 0.0
     AND speculative_retry = '99PERCENTILE';
 
-CREATE TABLE dev_dialcode_store.dial_code (
+CREATE TABLE IF NOT EXISTS dev_dialcode_store.dial_code (
     identifier text PRIMARY KEY,
     batchcode text,
     channel text,
@@ -120,7 +120,7 @@ CREATE TABLE dev_dialcode_store.dial_code (
     AND read_repair_chance = 0.0
     AND speculative_retry = '99PERCENTILE';
 
-CREATE TABLE dev_dialcode_store.system_config (
+CREATE TABLE IF NOT EXISTS dev_dialcode_store.system_config (
     prop_key text PRIMARY KEY,
     prop_value text
 ) WITH bloom_filter_fp_chance = 0.01
@@ -140,9 +140,9 @@ CREATE TABLE dev_dialcode_store.system_config (
 
 INSERT INTO dev_dialcode_store.system_config (prop_key, prop_value) values('dialcode_max_index', '1');
 
-CREATE KEYSPACE dev_content_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+CREATE KEYSPACE IF NOT EXISTS dev_content_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
-CREATE TABLE dev_content_store.content_data (
+CREATE TABLE IF NOT EXISTS dev_content_store.content_data (
     content_id text PRIMARY KEY,
     body blob,
     externallink text,
@@ -165,9 +165,9 @@ CREATE TABLE dev_content_store.content_data (
     AND read_repair_chance = 0.0
     AND speculative_retry = '99PERCENTILE';
 
-CREATE KEYSPACE sunbird WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+CREATE KEYSPACE IF NOT EXISTS sunbird WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
-CREATE TABLE sunbird.bulk_upload_process_task (
+CREATE TABLE IF NOT EXISTS sunbird.bulk_upload_process_task (
     processid text,
     sequenceid int,
     createdon timestamp,
@@ -194,7 +194,7 @@ CREATE TABLE sunbird.bulk_upload_process_task (
     AND read_repair_chance = 0.0
     AND speculative_retry = '99PERCENTILE';
 
-CREATE TABLE sunbird.assessment_item (
+CREATE TABLE IF NOT EXISTS sunbird.assessment_item (
     id text PRIMARY KEY,
     answers text,
     assessmentitemid text,
@@ -230,7 +230,7 @@ CREATE INDEX inx_ai_userid ON sunbird.assessment_item (userid);
 CREATE INDEX inx_ai_assessmentitemid ON sunbird.assessment_item (assessmentitemid);
 CREATE INDEX inx_ai_courseid ON sunbird.assessment_item (courseid);
 
-CREATE TABLE sunbird.bulk_upload_process (
+CREATE TABLE IF NOT EXISTS sunbird.bulk_upload_process (
     id text PRIMARY KEY,
     createdby text,
     createdon timestamp,
@@ -266,9 +266,9 @@ CREATE TABLE sunbird.bulk_upload_process (
 CREATE INDEX inx_status ON sunbird.bulk_upload_process (status);
 
 
-CREATE KEYSPACE dev_category_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+CREATE KEYSPACE IF NOT EXISTS dev_category_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
-CREATE TABLE dev_category_store.category_definition_data (
+CREATE TABLE IF NOT EXISTS dev_category_store.category_definition_data (
     identifier text PRIMARY KEY,
     forms map<text, text>,
     objectmetadata map<text, text>
@@ -287,9 +287,9 @@ CREATE TABLE dev_category_store.category_definition_data (
     AND read_repair_chance = 0.0
     AND speculative_retry = '99PERCENTILE';
 
-CREATE KEYSPACE dialcodes WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+CREATE KEYSPACE IF NOT EXISTS dialcodes WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
-CREATE TABLE dialcodes.dialcode_images (
+CREATE TABLE IF NOT EXISTS dialcodes.dialcode_images (
     filename text PRIMARY KEY,
     channel text,
     "config" map<text, text>,
@@ -313,7 +313,7 @@ CREATE TABLE dialcodes.dialcode_images (
     AND read_repair_chance = 0.0
     AND speculative_retry = '99PERCENTILE';
 
-CREATE TABLE dialcodes.dialcode_batch (
+CREATE TABLE IF NOT EXISTS dialcodes.dialcode_batch (
     processid uuid PRIMARY KEY,
     channel text,
     "config" map<text, text>,
@@ -337,9 +337,9 @@ CREATE TABLE dialcodes.dialcode_batch (
     AND read_repair_chance = 0.0
     AND speculative_retry = '99PERCENTILE';
 
-CREATE KEYSPACE dev_hierarchy_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+CREATE KEYSPACE IF NOT EXISTS dev_hierarchy_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
-CREATE TABLE dev_hierarchy_store.content_hierarchy (
+CREATE TABLE IF NOT EXISTS dev_hierarchy_store.content_hierarchy (
     identifier text PRIMARY KEY,
     hierarchy text,
     relational_metadata text
@@ -358,7 +358,7 @@ CREATE TABLE dev_hierarchy_store.content_hierarchy (
     AND read_repair_chance = 0.0
     AND speculative_retry = '99PERCENTILE';
 
-CREATE TABLE dev_hierarchy_store.framework_hierarchy (
+CREATE TABLE IF NOT EXISTS dev_hierarchy_store.framework_hierarchy (
     identifier text PRIMARY KEY,
     hierarchy text
 ) WITH bloom_filter_fp_chance = 0.01
