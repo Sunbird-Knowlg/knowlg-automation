@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS lock_db.lock (
     AND min_index_interval = 128
     AND read_repair_chance = 0.0
     AND speculative_retry = '99PERCENTILE';
-CREATE INDEX lock_lockid_idx ON lock_db.lock ("lockid");
+CREATE INDEX IF NOT EXISTS lock_lockid_idx ON lock_db.lock ("lockid");
 
 
 CREATE KEYSPACE IF NOT EXISTS dev_script_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
@@ -225,10 +225,10 @@ CREATE TABLE IF NOT EXISTS sunbird.assessment_item (
     AND min_index_interval = 128
     AND read_repair_chance = 0.0
     AND speculative_retry = '99PERCENTILE';
-CREATE INDEX inx_ai_contentid ON sunbird.assessment_item (contentid);
-CREATE INDEX inx_ai_userid ON sunbird.assessment_item (userid);
-CREATE INDEX inx_ai_assessmentitemid ON sunbird.assessment_item (assessmentitemid);
-CREATE INDEX inx_ai_courseid ON sunbird.assessment_item (courseid);
+CREATE INDEX IF NOT EXISTS inx_ai_contentid ON sunbird.assessment_item (contentid);
+CREATE INDEX IF NOT EXISTS inx_ai_userid ON sunbird.assessment_item (userid);
+CREATE INDEX IF NOT EXISTS inx_ai_assessmentitemid ON sunbird.assessment_item (assessmentitemid);
+CREATE INDEX IF NOT EXISTS inx_ai_courseid ON sunbird.assessment_item (courseid);
 
 CREATE TABLE IF NOT EXISTS sunbird.bulk_upload_process (
     id text PRIMARY KEY,
@@ -263,7 +263,7 @@ CREATE TABLE IF NOT EXISTS sunbird.bulk_upload_process (
     AND min_index_interval = 128
     AND read_repair_chance = 0.0
     AND speculative_retry = '99PERCENTILE';
-CREATE INDEX inx_status ON sunbird.bulk_upload_process (status);
+CREATE INDEX IF NOT EXISTS inx_status ON sunbird.bulk_upload_process (status);
 
 
 CREATE KEYSPACE IF NOT EXISTS dev_category_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
