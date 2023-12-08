@@ -2,17 +2,17 @@
 CREATE KEYSPACE IF NOT EXISTS lock_db WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
 CREATE TABLE IF NOT EXISTS lock_db.lock (
-    "resourceId" text,
-    "resourceType" text,
-    "createdBy" text,
-    "createdOn" timestamp,
-    "creatorInfo" text,
-    "deviceId" text,
-    "expiresAt" timestamp,
-    "lockId" uuid,
-    "resourceInfo" text,
-    PRIMARY KEY ("resourceId", "resourceType")
-) WITH CLUSTERING ORDER BY ("resourceType" ASC)
+    "resourceid" text,
+    "resourcetype" text,
+    "createdby" text,
+    "createdon" timestamp,
+    "creatorinfo" text,
+    "deviceid" text,
+    "expiresat" timestamp,
+    "lockid" uuid,
+    "resourceinfo" text,
+    PRIMARY KEY ("resourceid", "resourceTtype")
+) WITH CLUSTERING ORDER BY ("resourcetype" ASC)
     AND bloom_filter_fp_chance = 0.01
     AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
     AND comment = ''
