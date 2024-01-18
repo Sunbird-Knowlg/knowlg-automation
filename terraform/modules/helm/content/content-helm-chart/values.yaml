@@ -38,7 +38,7 @@ cloud_storage_bundle_folder: "bundle"
 cloud_storage_media_folder: "media"
 cloud_storage_ecar_folder: "ecar_files"
 cloud_storage_upload_url_ttl: "54000"
-cloudstorage_relative_path_prefix_content: CONTENT_STORAGE_BASE_PATH
+cloudstorage_relative_path_prefix_content: CLOUD_STORAGE_BASE_PATH
 cloudstorage_metadata_list: ["appIcon", "artifactUrl", "posterImage", "previewUrl", "thumbnail", "assetsMap", "certTemplate", "itemSetPreviewUrl", "grayScaleAppIcon", "sourceURL", "variants", "downloadUrl", "streamingUrl", "toc_url", "data", "question", "solutions", "editorState", "media", "pdfUrl", "transcripts"]
 #cloudstorage_read_base_path: "https://sunbirddevbbpublic.blob.core.windows.net"
 #cloudstorage_write_base_path: ["https://sunbirdstagingpublic.blob.core.windows.net", "https://sunbirddevbbpublic.blob.core.windows.net"]
