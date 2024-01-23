@@ -240,4 +240,6 @@ data:
 
     dial_id =  "https://dev.knowlg.sunbirded.org/dial/{dialcode}"
     dial_type = "https://dev.knowlg.sunbirded.org/ns/"
+    cloud_storage_container = "{{ .Values.dial_storage_container }}"
+
 
