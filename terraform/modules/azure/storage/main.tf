@@ -34,7 +34,7 @@ resource "azurerm_storage_account" "storage_account" {
 resource "azurerm_storage_container" "storage_container" {
   name                  = "${var.storage_container_name}"
   storage_account_name  = azurerm_storage_account.storage_account.name
-  container_access_type = "container"
+  container_access_type = "blob"
 }
 
 resource "azurerm_storage_blob" "upload_schemas" {
