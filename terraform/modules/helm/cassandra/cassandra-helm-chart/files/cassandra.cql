@@ -1,17 +1,17 @@
 CREATE KEYSPACE IF NOT EXISTS lock_db WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
 CREATE TABLE IF NOT EXISTS lock_db.lock (
-    "resourceId" text,
-    "resourceType" text,
-    "createdBy" text,
-    "createdOn" timestamp,
-    "creatorInfo" text,
-    "deviceId" text,
-    "expiresAt" timestamp,
-    "lockId" uuid,
-    "resourceInfo" text,
-    PRIMARY KEY ("resourceId", "resourceType")
-) WITH CLUSTERING ORDER BY ("resourceType" ASC)
+    "resourceid" text,
+    "resourcetype" text,
+    "createdby" text,
+    "createdon" timestamp,
+    "creatorinfo" text,
+    "deviceid" text,
+    "expiresat" timestamp,
+    "lockid" uuid,
+    "resourceinfo" text,
+    PRIMARY KEY ("resourceid", "resourcetype")
+) WITH CLUSTERING ORDER BY ("resourcetype" ASC)
     AND bloom_filter_fp_chance = 0.01
     AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
     AND comment = ''
@@ -26,7 +26,8 @@ CREATE TABLE IF NOT EXISTS lock_db.lock (
     AND min_index_interval = 128
     AND read_repair_chance = 0.0
     AND speculative_retry = '99PERCENTILE';
-CREATE INDEX IF NOT EXISTS lock_lockid_idx ON lock_db.lock ("lockId");
+
+CREATE INDEX IF NOT EXISTS lock_lockid_idx ON lock_db.lock ("lockid");
 
 CREATE KEYSPACE IF NOT EXISTS dev_script_store WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
