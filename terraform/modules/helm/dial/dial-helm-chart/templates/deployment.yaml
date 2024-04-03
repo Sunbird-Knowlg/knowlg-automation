@@ -51,10 +51,10 @@ spec:
         {{- end }}
         volumeMounts:
           - name: {{ .Chart.Name }}-config
-            mountPath: /home/sunbird/sunbird-dial-service-1.0-SNAPSHOT/config/application.conf
+            mountPath: /home/sunbird/dial-service-1.0-SNAPSHOT/config/application.conf
             subPath: dial-service_application.conf
           - name: {{ .Chart.Name }}-xml-config
-            mountPath: /home/sunbird/sunbird-dial-service-1.0-SNAPSHOT/config/logback.xml
+            mountPath: /home/sunbird/dial-service-1.0-SNAPSHOT/config/logback.xml
             subPath: dial-service_logback.xml
           
 ---
