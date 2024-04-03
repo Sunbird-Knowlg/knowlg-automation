@@ -554,6 +554,8 @@ data:
         publish.request.topic : "dev.knowlg.publish.job.request"
     }
 
+    kafka.topics.graph.event: "dev.knowlg.learning.graph.events"
+
     # Need to depreacte 
     # DIAL Link Config
     dial_service {

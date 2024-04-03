@@ -33,10 +33,6 @@
         "identifier": {
             "type": "string"
         },
-        "trackable": {
-            "type": "boolean",
-            "default": false
-        },
         "orgIdFieldName": {
             "type": "string"
         },
