@@ -6,8 +6,8 @@ env:
 replicaCount: 1
 #repository: docker.io/aimansharief/content-service-modified2
 #image_tag: R5.7.0
-repository: docker.io/shouryasolanki/content-service
-image_tag: R5.8.2
+repository: docker.io/aimansharief/content-service
+image_tag: R6.0.1
 resources:
   requests:
     cpu: 100m

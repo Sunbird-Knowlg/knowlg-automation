@@ -128,7 +128,11 @@ extraVolumeMounts: []
 ##      #!/bin/sh
 ##      echo "Do something."
 ##
-initScripts: {}
+initScripts:
+  install_repository_azure_plugin.sh: |
+    #!/bin/bash
+    cd /opt/bitnami/elasticsearch/bin/
+    ./elasticsearch-plugin install repository-azure -b
 ## @param initScriptsCM ConfigMap with the init scripts. Evaluated as a template.
 ## Note: This will override initScripts
 ##
@@ -459,7 +463,7 @@ ingress:
 master:
   ## @param master.masterOnly Deploy the Elasticsearch master-elegible nodes as master-only nodes. Recommended for high-demand deployments.
   ## If you are
-  masterOnly: true
+  masterOnly: false
   ## @param master.replicaCount Number of master-elegible replicas to deploy
   ##
   replicaCount: 1
@@ -491,18 +495,18 @@ master:
   ##
   resources:
     requests:   
-      cpu: 0.5
-      memory: 1Gi
-    limits:
       cpu: 1
       memory: 2Gi
+    limits:
+      cpu: 2
+      memory: 4Gi
   ## @param master.heapSize Elasticsearch master-eligible node heap size.
   ## Note: The recommended heapSize is half of the container's memory.
   ## If omitted, it will be automatically set.
   ## Example:
   ##   heapSize: 128m
   ##
-  heapSize: 128m
+  heapSize: 2G
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## @param master.podSecurityContext.enabled Enabled master-elegible pods' Security Context
@@ -730,7 +734,7 @@ master:
       - ReadWriteOnce
     ## @param master.persistence.size Persistent Volume Size
     ##
-    size: 8Gi
+    size: 25Gi
   ## Pods Service Account
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
   ## @param master.serviceAccount.create Specifies whether a ServiceAccount should be created
@@ -763,7 +767,7 @@ master:
 data:
   ## @param data.replicaCount Number of data-only replicas to deploy
   ##
-  replicaCount: 1
+  replicaCount: 0
   ## @param data.nameOverride String to partially override elasticsearch.data.fullname
   ##
   nameOverride: ""
@@ -1060,7 +1064,7 @@ data:
 coordinating:
   ## @param coordinating.replicaCount Number of coordinating-only replicas to deploy
   ##
-  replicaCount: 1
+  replicaCount: 0
   ## @param coordinating.nameOverride String to partially override elasticsearch.coordinating.fullname
   ##
   nameOverride: ""
@@ -1321,7 +1325,7 @@ ingest:
   enabled: false
   ## @param ingest.replicaCount Number of ingest-only replicas to deploy
   ##
-  replicaCount: 2
+  replicaCount: 0
   ## @param ingest.nameOverride String to partially override elasticsearch.ingest.fullname
   ##
   nameOverride: ""

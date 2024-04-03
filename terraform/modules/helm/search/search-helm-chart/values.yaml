@@ -6,8 +6,8 @@ env:
   javaoptions: -Xmx600m
 
 replicaCount: 1
-repository: docker.io/aimansharief/search-service-modified
-image_tag: R5.2.0
+repository: docker.io/aimansharief/search-service
+image_tag: R6.0.1
 resources:
   requests:
     cpu: 100m
