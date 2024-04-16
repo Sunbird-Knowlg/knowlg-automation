@@ -347,6 +347,7 @@ post-publish-processor:
       lms.basePath = "http://localhost:9000/lms"
       learning_service.basePath = "http://localhost:8080/learning-service"
       dial.basePath = "http://dial-service.knowlg-api.svc.cluster.local:9000/dial/"
+      content.basePath = "http://content-service.knowlg-api.svc.cluster.local:9000/content"
     }
 
     dialcode {
