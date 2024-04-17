@@ -1,8 +1,8 @@
 namespace: "knowlg-job"
 imagepullsecrets: ""
 dockerhub: ""
-repository: "pallakartheekreddy/flink-jobs"
-image_tag: "R5.8.2"
+repository: "aimansharief/kp-jobs"
+image_tag: "R6.0.1"
 serviceMonitor:
   enabled: false
 replicaCount: 1
